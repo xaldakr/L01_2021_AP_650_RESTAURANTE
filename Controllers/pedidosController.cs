@@ -40,10 +40,10 @@ namespace Prueba1.Properties
         [HttpGet]
         [Route("GetByCliente/{id}")]
         public IActionResult GetCli(int id){
-            pedidos? pedido = (from e in _restauranteContexto.pedidos
+            List<pedidos> pedido = (from e in _restauranteContexto.pedidos
                                     where e.clienteId == id
-                                    select e).FirstOrDefault();
-            if (pedido == null){
+                                    select e).ToList();
+            if (pedido.Count() == 0){
                 return NotFound();
             }
             return Ok(pedido);
@@ -52,10 +52,10 @@ namespace Prueba1.Properties
         [HttpGet]
         [Route("GetByMoto/{id}")]
         public IActionResult GetMoto(int id){
-            pedidos? pedido = (from e in _restauranteContexto.pedidos
+            List<pedidos> pedido = (from e in _restauranteContexto.pedidos
                                     where e.motoristaId == id
-                                    select e).FirstOrDefault();
-            if (pedido == null){
+                                    select e).ToList();
+            if (pedido.Count() == 0){
                 return NotFound();
             }
             return Ok(pedido);
